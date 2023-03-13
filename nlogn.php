@@ -44,9 +44,9 @@ function mergeSort($arr, $r, $l)
     
     if ($r < $l) {
         $m = ($r + $l) / 2;
-        merge($arr,$r,$l);
         mergeSort($arr, $r, $m - 1);
         mergeSort($arr, $m, $l);
+        merge($arr,$r,$l);
     }
     return $arr;
     //  $m = count($arr) / 2;
