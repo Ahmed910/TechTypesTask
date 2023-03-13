@@ -1,8 +1,17 @@
 <?php
 // I have tries for 4 hours but I face some problems and this final try ...
 // I will try again to find a better solution later ...
-function merge($arr1, $arr2)
+function merge($arrToSorted, $r,$l)
 {
+     $m = ($r+$l) / 2;
+    $arr1 = [];
+    $arr2 = [];
+     for($i=0;$i<$m-1;$i++){
+         $arr1[] = $arrToSorted[$i];
+     }
+     for($j=$m;$j<count($arrToSorted);$j++){
+         $arr2[] = $arrToSorted[$j];
+     }
     $i = 0;
     $j = 0;
     $arr = [];
@@ -29,28 +38,34 @@ function merge($arr1, $arr2)
     return $arr;
 }
 
- function mergeSort($arr)
- {
+function mergeSort($arr, $r, $l)
+{
+
     
-     if(count($arr) == 1){
-        // merge($arr, $arr0) merge two arrays.    
-       return $arr;  
-     } 
-     $m = count($arr) / 2;
-    
-     for($i=0;$i<$m-1;$i++){
-         $arr1[] = $arr[$i];
-     }
-     for($j=$m;$j<count($arr);$j++){
-         $arr2[] = $arr[$j];
-     }
-     mergeSort($arr1);
-     mergeSort($arr2);
- }
+    if ($r < $l) {
+        $m = ($r + $l) / 2;
+        merge($arr,$r,$l);
+        mergeSort($arr, $r, $m - 1);
+        mergeSort($arr, $m, $l);
+    }
+    return $arr;
+    //  $m = count($arr) / 2;
 
+    //  for($i=0;$i<$m-1;$i++){
+    //      $arr1[] = $arr[$i];
+    //  }
+    //  for($j=$m;$j<count($arr);$j++){
+    //      $arr2[] = $arr[$j];
+    //  }
+    //  mergeSort($arr1);
+    //  mergeSort($arr2);
+}
 
+$arrToSort = [2,14,3,12,6];
 
-$arr = [5, 8, 15, 30];
-$arr0 = [3, 9, 12, 20, 40, 50];
-$a = merge($arr, $arr0);
-print_r($a);
+$sortedArr = mergeSort($arrToSort,0,count($arrToSort));
+print_r($sortedArr);
+// $arr = [5, 8, 15, 30];
+// $arr0 = [3, 9, 12, 20, 40, 50];
+// $a = merge($arr, $arr0);
+// print_r($a);
